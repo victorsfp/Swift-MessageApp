@@ -1,6 +1,10 @@
 
 import UIKit
 
+protocol ColorPickerDelegate: class {
+    func applyColor(color: UIColor)
+}
+
 class ColorPickerViewController: UIViewController {
 
     @IBOutlet weak var viColor: UIView!
@@ -8,6 +12,8 @@ class ColorPickerViewController: UIViewController {
     @IBOutlet weak var slRed: UISlider!
     @IBOutlet weak var slGreen: UISlider!
     @IBOutlet weak var slBlue: UISlider!
+    
+    weak var delegate: ColorPickerDelegate?
     
     
     override func viewDidLoad() {
@@ -17,6 +23,7 @@ class ColorPickerViewController: UIViewController {
     
     @IBAction func chooseColor(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+        delegate?.applyColor(color: viColor.backgroundColor!)
     }
     
     @IBAction func changeColor(_ sender: UISlider) {
